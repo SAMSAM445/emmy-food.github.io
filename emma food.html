@@ -1,0 +1,172 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TastyBites Food Order</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ff6b35,#ffb347);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:700px;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1{
+    text-align:center;
+    color:#ff6b35;
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    border:2px solid #ddd;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#ff6b35;
+    color:white;
+    font-size:18px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+.summary{
+    margin-top:20px;
+    padding:15px;
+    border-radius:10px;
+    background:#f4f4f4;
+    display:none;
+}
+
+.total{
+    color:green;
+    font-size:22px;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🍔 SAMSAM SWEET P</h1>
+
+    <div class="form-group">
+        <label>Customer Name</label>
+        <input type="text" id="customerName">
+    </div>
+
+    <div class="form-group">
+        <label>Delivery Location</label>
+        <input type="text" id="location">
+    </div>
+
+    <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="phone">
+    </div>
+
+    <div class="form-group">
+        <label>Select Food</label>
+        <select id="food">
+            <option value="2500">Burger - ₦2500</option>
+            <option value="3500">Pizza - ₦3500</option>
+            <option value="1500">Shawarma - ₦1500</option>
+            <option value="5000">Chicken Combo - ₦5000</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Quantity</label>
+        <input type="number" id="quantity" value="1" min="1">
+    </div>
+
+    <button onclick="placeOrder()">Place Order</button>
+
+    <div class="summary" id="summary">
+        <h2>Order Summary</h2>
+
+        <p><strong>Name:</strong> <span id="sName"></span></p>
+        <p><strong>Location:</strong> <span id="sLocation"></span></p>
+        <p><strong>Phone:</strong> <span id="sPhone"></span></p>
+        <p><strong>Food:</strong> <span id="sFood"></span></p>
+        <p><strong>Quantity:</strong> <span id="sQty"></span></p>
+
+        <p class="total">
+            Total: ₦<span id="totalAmount"></span>
+        </p>
+    </div>
+
+</div>
+
+<script>
+
+function placeOrder(){
+
+    let name = document.getElementById("customerName").value;
+    let location = document.getElementById("location").value;
+    let phone = document.getElementById("phone").value;
+
+    let food = document.getElementById("food");
+    let foodName = food.options[food.selectedIndex].text;
+
+    let price = document.getElementById("food").value;
+    let quantity = document.getElementById("quantity").value;
+
+    // INTENTIONAL BUG BELOW
+    let total = price + quantity;
+
+    document.getElementById("sName").innerText = name;
+    document.getElementById("sLocation").innerText = location;
+    document.getElementById("sPhone").innerText = phone;
+    document.getElementById("sFood").innerText = foodName;
+    document.getElementById("sQty").innerText = quantity;
+    document.getElementById("totalAmount").innerText = total;
+
+    document.getElementById("summary").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
